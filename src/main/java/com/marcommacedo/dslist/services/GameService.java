@@ -28,4 +28,11 @@ public class GameService {
 		
 		return new GameDTO(result);
 	}
+	
+	@Transactional(readOnly = true)
+	public List<GameMinDTO> getByListId(Long idList) {
+		var result = gameRepository.searchByListId(idList);
+		
+		return result.stream().map(x -> new GameMinDTO(x)).toList();
+	}
 }
